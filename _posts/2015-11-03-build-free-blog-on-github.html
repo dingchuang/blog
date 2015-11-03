@@ -80,9 +80,9 @@ title: 在github上搭建免费博客站点
 		&lt;h2&gt;{{ page.title }}&lt;/h2&gt;<br>
 		&lt;p&gt;最新文章&lt;/p&gt;<br>
 		&lt;ul&gt;<br>
-		&emsp;{% for post in site.posts %} <br>
+		&emsp;{% for post in site.posts %}<br>
 		&emsp;&emsp;&lt;li&gt;{{ post.date | date_to_string }} &lt;a href="{{ site.baseurl }}{{ post.url }}"&gt;{{ post.title }}&lt;/a&gt;&lt;/li&gt;<br>
-		&emsp;{% endfor %}<br>
+		&emsp;{% endfor %} <br>
 		&lt;/ul&gt;<br>
 	</blockquote>
 	注：它的Yaml文件头表示，首页使用default模板，标题为"我的Blog"。然后，首页使用了{% for post in site.posts %}，表示对所有帖子进行一个遍历。这里要注意的是，Liquid模板语言规定，输出内容使用两层大括号，单纯的命令使用一层大括号。至于{{site.baseurl}}就是_config.yml中设置的baseurl变量。<br><br>
