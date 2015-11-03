@@ -5,7 +5,41 @@ title: 在github上搭建免费博客站点
 <h2>{{ page.title }}</h2>
 
 <p>
-	github上搭建个人博客的优点：<br>1. 拥有绝对的管理权；<br>2. 享受github带来的一切便利：不管何时何地，只要向主机提交commit，就能发布新文章；<br>3. 免费，无限流量，世界各地访问速度都很快；<br>4. 搭建简单，书写简单，支持markdown；
+	github上搭建个人博客的优点：<br>1. 拥有绝对的管理权；<br>2. 享受github带来的一切便利：不管何时何地，只要向主机提交commit，就能发布新文章；<br>3. 免费，无限流量，世界各地访问速度都很快；	<br>4. 搭建简单，书写简单，支持markdown；
+</p>
+
+<br>
+
+<p>
+	搭建一个具有基本功能的blog的具体流程：<br>开始之前，假设已经安装了git，并且拥有github账户。
+	<br><strong>第一步：创建项目</strong>
+	<br>1. 创建目录并进行初始化：
+	<blockquote>$ mkdir blog; cd blog; git init</blockquote>
+	<br>2. 创建没有父节点的分支gh-pages(github规定，只有该分支的页面才会生成网页文件)：
+	<blockquote>$git checkout --orphan gh-pages</blockquote>
+
+	<br><strong>第二步：创建配置文件</strong>
+	<br>1. 在项目根目录下，建立一个名为_config.yml的文本文件。它是jekyll的设置文件，我们在里面填入如下内容，其他设置都可以用默认选项，具体解释参见<a href="https://github.com/mojombo/jekyll/wiki/Configuration">官方网页</a>。
+	<blockquote>baseurl: /jekyll_demo</blockquote>
+
+	<br><strong>第三步：创建模板文件</strong>
+	<br>1. 在项目根目录下，创建一个_layouts目录，用于存放模板文件。
+	<blockquote>$ mkdir _layouts</blockquote>
+	<br>进入该目录，创建一个default.html文件，作为Blog的默认模板。并在该文件中填入以下内容。
+	<blockquote>
+		&lt;!DOCTYPE html&gt;
+　　　　	<br>&lt;html&gt;
+		<br>&lt;head&gt;
+		<br>&emsp;meta http-equiv="content-type" content="text/html; charset=utf-8" /&gt;
+		<br>&emsp;&lt;title&gt;{{ page.title }}&lt;/title&gt;
+		<br>&lt;/head&gt;
+		<br>&lt;body&gt;
+		<br>&emsp;{{ content }}
+		<br>&lt;/body&gt;
+		<br>&lt;/html&gt;
+	</blockquote>
+	<br>使用<a href="https://github.com/shopify/liquid/wiki/liquid-for-designers">Liquid模板语言</a>，{{ page.title }}表示文章标题，{{ content }}表示文章内容，更多模板变量请参考<a href="https://github.com/mojombo/jekyll/wiki/Template-Data">官方文档</a>。
+
 </p>
 
 <p>{{ page.date | date_to_string }}</p>
