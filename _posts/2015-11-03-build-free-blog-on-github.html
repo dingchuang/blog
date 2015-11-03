@@ -36,7 +36,42 @@ title: 在github上搭建免费博客站点
 	<blockquote>
 		$ mkdir _layouts
 	</blockquote>
-	2. 进入该目录，创建一个<a href="../../../files/2015-11-03-build-free-blog-on-github/index.html">default.html</a>文件，作为Blog的默认模板。
+	2. 进入该目录，创建一个<a href="http://dingchuang.github.io/blog/files/2015-11-03-build-free-blog-on-github/index.html">default.html</a>文件，作为Blog的默认模板。<br>
+	注：使用<a href="https://github.com/shopify/liquid/wiki/liquid-for-designers">Liquid模板语言</a>，更多模板变量请参考<a href="https://github.com/mojombo/jekyll/wiki/Template-Data">官方文档</a>。<br><br>
+
+	<strong>第四步：创建文章</strong><br>
+	1. 回到项目根目录，创建一个_posts目录，用于存放blog文章。
+	<blockquote>
+		$ mkdir _posts
+	</blockquote>
+	2. 进入该目录，创建第一篇文章。文章就是普通的文本文件，文件名假定为<a href="http://dingchuang.github.io/blog/files/2015-11-03-build-free-blog-on-github/2015-11-03-hello-world.html">2015-11-03-hello-world.html</a>。<br>
+	注：1. 文件名必须为"年-月-日-文章标题.后缀名"的格式。如果网页代码采用html格式，后缀名为html；如果采用markdown格式，后缀名为md。特别注意，行首不能有空格。<br>
+	2. 每篇文章的头部，必须有一个<a href="https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter">yaml文件头</a>，用来设置一些元数据。它用三根短划线"---"，标记开始和结束，里面每一行设置一种元数据。"layout:default"，表示该文章的模板使用_layouts目录下的default.html文件；"title: 你好，世界"，表示该文章的标题是"你好，世界"，如果不设置这个值，默认使用嵌入文件名的标题，即"hello world"。<br>
+	3. 在yaml文件头后面，就是文章的正式内容，里面可以使用模板变量。{{ page.title }}就是文件头中设置的"你好，世界"，{{ page.date }}则是嵌入文件名的日期（也可以在文件头重新定义date变量），"| date_to_string"表示将page.date变量转化成人类可读的格式。<br><br>
+	
+	<strong>第五步：创建首页</strong><br>
+	1. 回到根目录，创建一个<a href="http://dingchuang.github.io/blog/files/2015-11-03-build-free-blog-on-github/index.html">index.html</a>文件；<br>
+	注：它的Yaml文件头表示，首页使用default模板，标题为"我的Blog"。然后，首页使用了{% for post in site.posts %}，表示对所有帖子进行一个遍历。这里要注意的是，Liquid模板语言规定，输出内容使用两层大括号，单纯的命令使用一层大括号。至于{{site.baseurl}}就是_config.yml中设置的baseurl变量。<br><br>
+
+		<strong>第六步：发布内容</strong><br>
+	1. 现在，这个简单的Blog就可以发布了。先把所有内容加入本地git库。
+	<blockquote>
+		$ git add .<br>
+		$ git commit -m "first post"<br>
+	</blockquote>
+	2. 然后，前往github的网站，在网站上创建一个名为blog的库。接着，再将本地内容推送到github上你刚创建的库。注意，下面命令中的username，要替换成你的username。
+	<blockquote>
+		$ git remote add origin https://github.com/username/blog.git<br>
+		$ git push origin gh-pages<br>
+	</blockquote>
+	3. 上传成功之后，等10分钟左右，访问http://username.github.io/blog/就可以看到Blog已经生成了（将username换成你的用户名）。<br><br>
+
+	<strong>第七步：绑定域名</strong><br>
+	1. 如果你不想用http://username.github.com/blog/这个域名，可以换成自己的域名。<br>
+	（1）具体方法是在repo的根目录下面，新建一个名为CNAME的文本文件，里面写入你要绑定的域名，比如example.com或者xxx.example.com。<br>
+	（2）如果绑定的是顶级域名，则DNS要新建一条A记录，指向204.232.175.78。如果绑定的是二级域名，则DNS要新建一条CNAME记录，指向username.github.com（请将username换成你的用户名）。此外，别忘了将_config.yml文件中的baseurl改成根目录"/"。<br>
+	（3）至此，最简单的Blog就算搭建完成了。进一步的完善，请参考Jekyll创始人的<a href="https://github.com/mojombo/tpw">示例库</a>，以及其他用Jekyll搭建的<a href="https://github.com/mojombo/jekyll/wiki/Sites">blog</a>。<br><br>
+
 	（完）
 </p>
 
