@@ -47,11 +47,11 @@ title: 在github上搭建免费博客站点
 	2. 进入该目录，创建第一篇文章。文章就是普通的文本文件，文件名假定为<a href="http://dingchuang.github.io/blog/files/2015-11-03-build-free-blog-on-github/2015-11-03-hello-world.html">2015-11-03-hello-world.html</a>。<br>
 	注：1. 文件名必须为"年-月-日-文章标题.后缀名"的格式。如果网页代码采用html格式，后缀名为html；如果采用markdown格式，后缀名为md。特别注意，行首不能有空格。<br>
 	2. 每篇文章的头部，必须有一个<a href="https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter">yaml文件头</a>，用来设置一些元数据。它用三根短划线"---"，标记开始和结束，里面每一行设置一种元数据。"layout:default"，表示该文章的模板使用_layouts目录下的default.html文件；"title: 你好，世界"，表示该文章的标题是"你好，世界"，如果不设置这个值，默认使用嵌入文件名的标题，即"hello world"。<br>
-	3. 在yaml文件头后面，就是文章的正式内容，里面可以使用模板变量。{{ page.title }}就是文件头中设置的"你好，世界"，{{ page.date }}则是嵌入文件名的日期（也可以在文件头重新定义date变量），"| date_to_string"表示将page.date变量转化成人类可读的格式。<br><br>
+	3. 在yaml文件头后面，就是文章的正式内容，里面可以使用模板变量。&#123;&#123; page.title &#125;&#125;就是文件头中设置的"你好，世界"，&#123;&#123; page.date &#125;&#125;则是嵌入文件名的日期（也可以在文件头重新定义date变量），"| date_to_string"表示将page.date变量转化成人类可读的格式。<br><br>
 	
 	<strong>第五步：创建首页</strong><br>
 	1. 回到根目录，创建一个<a href="http://dingchuang.github.io/blog/files/2015-11-03-build-free-blog-on-github/index.html">index.html</a>文件；<br>
-	注：它的Yaml文件头表示，首页使用default模板，标题为"我的Blog"。然后，首页使用了{% for post in site.posts %}，表示对所有帖子进行一个遍历。这里要注意的是，Liquid模板语言规定，输出内容使用两层大括号，单纯的命令使用一层大括号。至于{{site.baseurl}}就是_config.yml中设置的baseurl变量。<br><br>
+	注：它的Yaml文件头表示，首页使用default模板，标题为"我的Blog"。然后，首页使用了{% for post in site.posts %}，表示对所有帖子进行一个遍历。这里要注意的是，Liquid模板语言规定，输出内容使用两层大括号，单纯的命令使用一层大括号。至于&#123;&#123; site.baseurl &#125;&#125;就是_config.yml中设置的baseurl变量。<br><br>
 
 		<strong>第六步：发布内容</strong><br>
 	1. 现在，这个简单的Blog就可以发布了。先把所有内容加入本地git库。
